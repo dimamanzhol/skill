@@ -107,9 +107,24 @@ The rules behind those numbers:
 - **Reduced motion keeps the character.** Kill the loops, never the character; it is load-bearing — and keep the pose that distinguishes the state.
 - **Split the two clocks.** Put free-running loops (breath, rock) on an inner group and one-shots (`done`, enter) on an outer one, so they never fight over the same `transform`. This is the first thing to do and it removes most of the need for the loop-exit handling in [motion.md](motion.md).
 
+## Idiom in code
+
+Before the material question comes the lock 0 question: **is this idiom a component at all, or an asset pipeline?**
+
+| Idiom | Stage 3 is |
+| --- | --- |
+| Flat graphic | Native. SVG shapes and CSS transforms; everything in this file applies unchanged. |
+| Drawn line | Native, as filled variable-width outline paths. Motion is stroke redraw, not transform. |
+| Typographic | Native, and the cheapest here — `font-variation-settings` where the face is variable, glyph swaps where it is not. |
+| Pixel grid | Native as a CSS grid or a canvas. Snap every frame, disable smoothing, scale only by whole multiples. |
+| Rendered object | Sprite frames, or a baked cut-out. The layer discipline above still applies — to the *cut-out*, not to a live form. |
+| Photographic | Sprite frames. There is no component here, only an asset pipeline and a naming convention. |
+
+The first four put the character inside the codebase, where anyone can add a state in an afternoon. The last two put it in a folder of images that someone has to regenerate. That is the whole of why lock 0 is decided first.
+
 ## Material in code
 
-The practical ranking, since this decides whether stage 3 is even possible:
+For the rendered and flat idioms, the practical ranking, since this decides whether stage 3 is even possible:
 
 | Material | In CSS/SVG |
 | --- | --- |

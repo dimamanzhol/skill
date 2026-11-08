@@ -1,10 +1,12 @@
 # Stage 2 — Image prompts
 
+**Two of the six idioms do not come through this stage at all.** Typographic and pixel-grid characters are drawn, not generated — image models produce soft approximations of pixel art and almost-right misspelled letterforms, and both are faster to build correctly in a vector tool than to argue a model into. If lock 0 picked either, skip to stage 3. The rest of this file assumes an idiom a model can actually render.
+
 Prompts are **derived from the bible, never invented fresh.** If you find yourself making up a detail at prompt-writing time, that detail belongs in stage 1 — go back and lock it, or you will get a different answer on the next render and have no idea which one is canon.
 
 ## Clause order
 
-Image models weight early tokens heavily and treat late ones as suggestions. Order the clauses by how much the decision matters and give material the most words, because material is the thing that will otherwise default to "soft 3D gradient".
+Image models weight early tokens heavily and treat late ones as suggestions. Order the clauses by how much the decision matters and give the opening the most words, because **medium and material are jointly the thing that will otherwise default to a soft 3D gradient under studio light** — and of the two, medium is the one people forget they are allowed to set.
 
 ```
 [MEDIUM + MATERIAL]  ← first and longest. 2–4 clauses.
@@ -20,10 +22,31 @@ Worked skeleton:
 
 > *Macro photograph of a needle-felted wool character, fuzzy fiber edges breaking the silhouette, completely matte with no specular highlights, soft ambient occlusion where the forms meet. The body is a single soft irregular blob, wider than tall, no limbs, slightly lopsided the way hand-felted wool is. Face is two solid black oval eyes and nothing else — no nose, no eyebrows, no mouth. Sitting upright, at rest. Pure black background, no horizon. Straight-on eye-level view, soft key light from upper left, subject centred with generous clear space.*
 
+
+## The medium clause
+
+The first slot is lock 0, and it is the slot most often filled by accident. Leave it vague and the model supplies the house default: a small soft object, three-quarter view, studio key light. That default is competent, which is exactly why it goes unnoticed.
+
+| Idiom | Opener | And then immediately rule out |
+| --- | --- | --- |
+| Rendered object | `Studio photograph of…` / `Macro photograph of…` | nothing — this is the model's native mode |
+| Flat graphic | `Flat two-colour screen print of…` / `Risograph print of…` | `no gradient, no shading, no highlight, no ambient occlusion, no drop shadow, no light source` |
+| Drawn line | `Single continuous brush-ink drawing of…` / `Monoline pen drawing of…` | `no fill, no colour blocking, no shading, line only, white paper` |
+| Photographic / collage | `Overhead photograph of a torn paper collage character…` | `no digital illustration, no vector, no flat colour` |
+
+**For the non-rendered idioms the negative clause is doing more work than the positive one.** A model asked for a flat screen print still wants to light it; the three or four absences above are what actually hold the idiom, and they belong at the front with the medium rather than buried in the negatives at the end.
+
+A flat-graphic skeleton, for contrast with the felt one above — same character, same locks, different lock 0:
+
+> *Flat two-colour screen print of a character, printed in warm persimmon and a near-black charcoal on uncoated cream paper, with visible slight misregistration between the two plates. Completely flat colour: no gradient, no shading, no highlight, no ambient occlusion, no drop shadow, no simulated light source anywhere. The body is a single rounded bean, taller than wide, narrower at the top and heavier at the base, fully convex, no corners and no points, with one small notch at the lower left. Face is two solid charcoal capsule slits and nothing else — no mouth, no nose, no eyebrows, no pupils, no highlights. Standing upright, at rest. Flat cream ground, no horizon, no texture beyond the paper grain. Straight-on, subject centred, generous clear space.*
+
+Note what changed and what did not. The form clause, the face clause and the state clause are byte-identical in spirit to the rendered version — those came from locks 1, 3 and 4 and the idiom has no opinion about them. Only the first clause, the light clause and the ground clause moved. **If switching idiom forces you to rewrite the form or the face, one of those two locks was never written as a construction in the first place.**
+
 Things that routinely go wrong and the fix:
 
 - **"Cute character" anywhere in the prompt** → you get the median mascot of the entire internet. Delete it. Cuteness is an outcome of the form, not an input.
 - **Material stated once, late** → it gets ignored. State it first and restate it in different words at the end.
+- **No medium clause at all** → you get a studio photograph of a soft object, every time, and it will look fine, and it will look like everyone else's. The absence is invisible per image and obvious across a set.
 - **Adjectives instead of construction** → "a soft blob" gives you a different blob every time. "A superellipse 1:1.15 tall, the top 40% one unbroken dome" gives you the same one.
 - **Naming what's absent is as important as naming what's present.** "No mouth, no nose, no eyebrows" does more work than any positive clause about the face.
 
@@ -68,10 +91,14 @@ text, watermark, logo, signature,
 multiple characters (for single-subject jobs), busy background, depth of field
 ```
 
-Two to add conditionally:
+Then add the block for your idiom, which matters more than any of the above:
 
-- If your material is **matte** (felt, clay, riso): add `specular highlight, glossy, wet, reflective`.
-- If your material is **flat** (riso, cut-paper): add `gradient, soft shading, ambient occlusion, volumetric light`.
+- **Flat graphic:** `gradient, soft shading, ambient occlusion, volumetric light, specular highlight, drop shadow, rim light, 3D render, depth of field, bevel`
+- **Drawn line:** `filled shapes, colour blocking, shading, hatching, 3D render, gradient, textured paper grain`
+- **Photographic / collage:** `digital illustration, vector art, flat colour, clean edges, rendered, CGI`
+- **Rendered object:** nothing extra for the idiom itself; add `specular highlight, glossy, wet, reflective` if the *material* is matte.
+
+The general list above is tuned for the rendered idiom and two of its lines need editing elsewhere. `3D cartoon character render` is redundant once the flat or line block is in. `drop shadow on white` is a negative in every idiom except photographic collage, where a real cast shadow is evidence of real paper and you want it.
 
 ## Iterating
 

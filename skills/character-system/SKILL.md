@@ -1,6 +1,6 @@
 ---
 name: character-system
-description: "Design a character system for an AI product — one locked form primitive, one committed material, a minimal face vocabulary, a state range, and a ground — then render it as a character bible, image-generation prompts, and animated SVG/React code. Use when someone wants a mascot, an assistant avatar, a brand character, a cast of characters, or a visual persona for an AI product; when a cast needs to stay consistent across renders; or when an existing mascot reads as generic, stocky, or AI-generated. Triggers on: mascot, mascot design, character design, character system, brand character, brand mascot, assistant avatar, AI persona, AI assistant persona, product character, cast of characters, creature, blob character, agent avatar, bot avatar, chatbot face, companion character, illustration system, expression sheet, turnaround, character bible, character style guide, idle animation, thinking state, loading character, our mascot looks generic, mascot feels off, design a mascot, draw a mascot, give the product a face, what should our AI look like, Grok Bot, ChatGPT dots, Claude characters, Duolingo owl, Clippy."
+description: "Design a character system for an AI product — one committed idiom, one locked form primitive, one committed material, a minimal face vocabulary, a state range, and a ground — then render it as a character bible, image-generation prompts, and animated SVG/React code. Use when someone wants a mascot, an assistant avatar, a brand character, a cast of characters, or a visual persona for an AI product; when a cast needs to stay consistent across renders; or when an existing mascot reads as generic, stocky, or AI-generated. Triggers on: mascot, mascot design, character design, character system, brand character, brand mascot, assistant avatar, AI persona, AI assistant persona, product character, cast of characters, creature, blob character, agent avatar, bot avatar, chatbot face, companion character, illustration system, expression sheet, turnaround, character bible, character style guide, idle animation, thinking state, loading character, our mascot looks generic, mascot feels off, design a mascot, draw a mascot, give the product a face, what should our AI look like, Grok Bot, ChatGPT dots, Claude characters, Duolingo owl, Clippy, pixel art mascot, pixel character, flat illustration character, vector mascot, risograph character, screen print character, line art mascot, ink drawing character, typographic mascot, letterform character, collage character, paper cut-out character, what style should our mascot be, our mascot only works as a render."
 ---
 
 # Character Systems for AI Products
@@ -13,10 +13,11 @@ So the deliverable is the decision set. The pictures are downstream.
 
 ## What to read, and when
 
-This file is the whole method: the stages and the seven locks are below and you do not need another file to run them. Everything else is depth for one stage, so **open a file when you reach the stage that needs it, and not before.** Loading all five costs about a thousand lines to answer a question that lives in one of them.
+This file is the whole method: the stages and the locks are below and you do not need another file to run them. Everything else is depth for one stage, so **open a file when you reach the stage that needs it, and not before.** Loading all six costs about thirteen hundred lines to answer a question that lives in one of them.
 
 | Open | When |
 | --- | --- |
+| [idiom.md](idiom.md) | Stage 1, at lock 0 — choosing the register, or everything the skill makes keeps coming out as the same kind of picture. The six idioms, what each costs to keep alive, and which materials each one can reach. |
 | [material.md](material.md) | Stage 1, at lock 2 — choosing the material, or a character reads too raw or too soft. The catalogue, what each one costs, and the hardness dial. |
 | [prompts.md](prompts.md) | Stage 2 only, once the bible exists. Prompt structure, the single-image consistency trick, negatives. |
 | [code.md](code.md) | Stage 3 only. SVG layering, the state machine, level-of-detail, the React shape. |
@@ -37,7 +38,9 @@ This file is the whole method: the stages and the seven locks are below and you 
 
 The same goes for a request that arrives as a species or an object — "a fox", "a robot", "an owl". That is a form, not a brief, and lock 1 will almost certainly argue with it. Do not open by arguing. Take the brief first; the form question has its own branch in Stage 1 below.
 
-**Stage 1 — Three directions, then lock.** Write three one-sentence directions that differ *at the material level*, not the cute level. "A felted blob", "a glazed ceramic pot", and "a stipple-print silhouette" are three directions. "A friendly blob", "a cute blob", and "a modern blob" are one direction and no decisions. Give each a sentence on what it says about the product and what it costs to produce. Get a pick, then write the seven locks as a bible.
+**Stage 1 — Three directions, then lock.** Write three one-sentence directions that differ *at the idiom or material level*, not the cute level. "A felted blob", "a glazed ceramic pot", and "a stipple-print silhouette" are three directions. "A friendly blob", "a cute blob", and "a modern blob" are one direction and no decisions.
+
+Three directions inside one idiom is the normal case and a good one. But if the brief has any of the signals in [idiom.md](idiom.md)'s choosing table — it must animate in code, it lives at 20px, the brand already owns a typeface — then **make at least one of the three a different idiom**, because that is a bigger fork than any material and the user cannot pick what you do not offer. Give each a sentence on what it says about the product and what it costs to produce. Get a pick, then write the locks as a bible.
 
 **Stage 1b — When the form is already decided.** Sometimes it is not open: the user arrives with a dragon, a brand character they already own, a mascot a founder is attached to, or something their illustrator drew. The three directions above assume a blank page, and running them anyway reads as refusing the request. Branch instead:
 
@@ -58,7 +61,29 @@ Stages 2 and 3 are siblings, not a sequence — both read from stage 1. If the b
 
 **Put it on a screen before calling the bible done.** A character bible is a set of claims about how something looks, and some of them are wrong in ways that are invisible in prose — a lid that seats in the description and floats in the render, a tilt that reads at 11° and not at 5°, an asymmetry that disappears at 24px. Render the states, look at them side by side at full size and at icon size, and push the corrections back into stage 1 rather than patching them downstream.
 
-## The seven locks
+## The locks
+
+### 0. Idiom
+
+What *kind of picture* this is, decided before what the thing is made of. A photograph of a felt character and a flat two-colour print of the same character are not two styles of one design. They are different deliverables, with different production costs, different size floors, and different answers to half the locks below.
+
+Six, and they do not substitute for each other:
+
+| Idiom | The mark is |
+| --- | --- |
+| **Rendered object** | light simulated on a volume |
+| **Flat graphic** | shapes with no light model at all |
+| **Drawn line** | a stroke, with weight and pressure |
+| **Typographic** | letterforms and their parts |
+| **Pixel grid** | discrete cells, aliasing intended |
+| **Photographic / collage** | real matter, photographed or scanned |
+
+The split that decides most of the project is not aesthetic. **Rendered object and photographic need generated or captured assets, and the cast drifts the moment whoever made them is unavailable. The other four are drawn once and reproducible by anyone with a vector tool, forever.** Settle that before anything else, because it is a staffing decision wearing a style decision's clothes.
+
+> **Wrong:** pick the material, write the prompts, discover at handover that every new state needs re-rendering by someone who has left the company.
+> **Right:** pick the idiom against who maintains it in two years, then pick the material from what that idiom can actually reach.
+
+**If you did not choose, you chose rendered object.** That is what an image model returns for an unqualified character prompt, and it is most of why this genre looks so related to itself. [idiom.md](idiom.md) has the six in depth, what each costs to keep alive, and which of [material.md](material.md)'s ten materials each one can reach — several reach none of them, and substitute a different formal system instead.
 
 ### 1. Form primitive
 
@@ -106,6 +131,8 @@ The minimum marks that read as alive. Pick an eye shape and a mouth rule, write 
 
 **Never add a nose, eyebrows, eyelids-with-lashes, or a pupil with a specular highlight.** The pupil highlight in particular is the fastest route to 2008 corporate vector art, and it does real harm: it promises a face capable of emoting, which yours is not going to deliver.
 
+**Two idioms amend that, and only two.** In **drawn line**, a brow is one short stroke in the same language as the body — it costs nothing structurally and promises no anatomy, because every other mark is a stroke too; the ban on lids and pupils still holds. In **typographic**, *no face at all* stops being the brave option and becomes the obvious one, since a counter already reads as an eye. Everywhere else the list above is absolute. See lock 0.
+
 **When a face is the wrong call.** When the character must live at 16–24px in the interface, where a face becomes mud and the silhouette is all you get. When the product is in a domain where a face patronizes — a character that grins at you about your bank balance, your test results, or a security incident. When the character stands next to real human avatars, where it competes. And when the character represents the *system* rather than an *agent*: a face implies a mind, and that is a claim about your product, not a style choice.
 
 > The face is an honesty surface. If it smiles while the model is failing, you have built something that lies in the interface. Either the expression range covers error and uncertainty properly, or there should be no face.
@@ -146,10 +173,13 @@ The character's mass was already decided when you locked the material — cerami
   - *Rigid* (ceramic, enamel, stone, metal) → **weight shift.** A sub-degree sway, or a drift in a joint. A rock that breathes is a beach ball.
   - *Polished and rigid* → **let the light move instead of the body.** Drift the specular slowly across the surface while the form stays perfectly still. This is the most restrained idle available and the most convincing, because stillness is what the material actually does.
   - *Mark-based* (ink, flat riso) → **almost nothing.** A barely-there drift in the stroke weight, or no idle at all; a flat mark that wobbles looks like a bug.
+  - *Quantised* (pixel grid) → **a discrete clock.** Two or three cell states swapping on a slow beat. Never a smooth transform: a pixel character that eases is a blurred photograph of a pixel character.
+  - *Typographic* → **a variable axis**, where the face has one. A single `font-variation-settings` interpolation moves the entire form coherently, which nothing else here does this cheaply.
 
   If you can perceive the idle as motion rather than as life, it is too big.
 - **Squash preserves volume.** Wider means shorter, by the same ratio. Uniform scaling is a balloon inflating, not a body moving.
 - **Deform where the material allows.** Felt squashes; glazed ceramic does not. If the material is rigid, put the motion in a joint, a gap, or a tilt instead — the constraint produces better motion than freedom does.
+- **Two idioms overrule the material on this.** **Drawn line** redraws the stroke rather than transforming it — a stroke scaled non-uniformly reveals itself as a filled shape wearing a costume. **Pixel grid** snaps to whole cells, every frame. Neither squashes, whatever the material says.
 - **Enter once.** The character arrives when the surface mounts and then stays. Re-animating the entrance on every re-render is the most common implementation bug in this genre.
 - **The thinking loop has no peak.** Constant amplitude, constant period, no accent beat.
 - **Decide whether it blinks.** A blink is the cheapest aliveness signal there is and it doubles as cover for the face cutting between states — but it commits you to a randomised timer, and it must be suppressed in `error`, where a stuck character should stare. See [motion.md](motion.md).
@@ -178,6 +208,7 @@ The tells that mark an AI mascot as generated rather than designed:
 - **The three-quarter studio render, drop shadow, white seamless.** The stock-3D look, and it has no ground rule.
 - **Chromatic glow on everything.** Where a rainbow bloom works, it is applied to exactly one element while the characters stay matte. Applied to all of it, it's a filter.
 - **A cast that differs by shape.** Diagnostic of no system at all.
+- **The unchosen photograph.** Every image in the deliverable opens with *photograph of*. Not wrong as a choice — wrong as a default, and it is the most invisible tell on this list because each individual image looks fine. See lock 0.
 - **The domain pun.** A kettle for a kitchen product, a shield for security, an owl for anything educational, a brain, a robot. Depiction standing in for a form decision — see lock 1.
 - **Purple.** Not banned — *unchosen* purple is. Derive the hue from the product's domain or its existing brand, the way every good example in this genre does.
 

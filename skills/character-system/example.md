@@ -43,6 +43,12 @@ The behavioural idea survived the change intact, which is the point — **the fo
 
 ## Stage 1 — The locks
 
+### 0. Idiom
+
+**Rendered object.** The brief wanted physical presence and the character's main job is marketing, where one good hero image earns more than a dozen cheap states. The cost was accepted openly: every new state needs re-rendering, so the state set was frozen at five before any prompt was written.
+
+The fork worth recording — **flat graphic** was the serious alternative and lost on one question. It would have been free to animate, free to recolour and reproducible by anyone in a vector tool. It was dropped because the hardness correction below is carried almost entirely by *light*, and flat has no light. Had the brief said "must animate in code", the correction would have had to be solved in silhouette alone and this would be a different character.
+
 ### 1. Form primitive
 
 A **soft weighted bean**: a fully convex body, taller than wide, narrower at the top and heavier toward the base, with a low centre of mass. Held in one sentence: *a rounded body with no corners anywhere and all its weight in the bottom third, so it always comes back upright.*

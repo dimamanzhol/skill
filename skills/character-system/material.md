@@ -4,6 +4,8 @@ Material is the lock that does the most work and gets skipped the most often. It
 
 **Flat vector fill and soft gradient are not materials.** They are what you get when nobody chose. The whole generic-mascot problem is downstream of that.
 
+**That is a warning about defaulting, not a ban on flatness.** Flat chosen deliberately is an *idiom*, not a missing material, and it is a strong one — see [idiom.md](idiom.md). Four of the six idioms reach almost none of the families below and substitute a different formal system for material entirely: colour relationships, stroke quality, a typeface, a grid. If lock 0 picked one of those, read [idiom.md](idiom.md)'s closing section rather than choosing from this catalogue and forcing it.
+
 ## Choosing
 
 Choose for the viewing condition first and the mood second. A material that dies at your actual display size is the wrong material no matter how good it looks in the hero render.

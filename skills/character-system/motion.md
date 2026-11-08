@@ -15,6 +15,19 @@ General easing and duration craft — which curve for an entering element, how l
 | Reduced motion | what to keep, not just what to kill |
 | Timing table | numbers to start from |
 
+**Everything below assumes motion is an eased transform on a continuous form.** That holds for two of the six idioms and needs translating for the other four. The craft is the same in every column — the two clocks, breaking the period, leaving a loop cleanly, interruption — but the channel it runs through is not, and running the wrong channel is how a character ends up fighting its own construction.
+
+| Idiom | Motion channel | Read this file |
+| --- | --- | --- |
+| Rendered object | transform on a baked cut-out; squash where the material allows | as written |
+| Flat graphic | transform on live SVG; the freest of the six | as written |
+| Drawn line | redrawing the stroke — `stroke-dasharray`, width modulation along the path, the line's own tremble | as written, but **never squash**: a stroke scaled non-uniformly exposes itself as a filled shape in a costume |
+| Typographic | `font-variation-settings` along a variable axis; glyph swaps where there is none | durations and curves apply unchanged; "secondary motion" does not — a variable axis moves the whole form at once, which is the point of it |
+| Pixel grid | discrete cell swaps on a slow beat | keep the two clocks, breaking the period, and interruption; **discard every easing curve and every sub-pixel value**, and snap each frame to the grid |
+| Photographic / collage | stop-motion holds, or rotation at cut-out joints | hold frames on a slow clock; smooth interpolation fights the material's own evidence of having been handled |
+
+Two sections below are idiom-independent and worth reading whichever column you are in: **interruption**, because states arrive out of order in every idiom, and **the always-on cost**, because a permanent animation is a permanent bill no matter what is moving.
+
 ## The two clocks
 
 A character runs on two clocks at once, and most implementation bugs in this genre come from treating them as one.
